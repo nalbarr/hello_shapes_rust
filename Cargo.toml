@@ -4,3 +4,11 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
+
+[lib]
+name = "mylib"
+path = "src/shapes/mod.rs"
+
+[[bin]]
+name = "mybin"
+path = "src/main.rs"
