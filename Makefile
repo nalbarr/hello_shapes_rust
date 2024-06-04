@@ -10,6 +10,8 @@ help:
 	@echo make test
 	@echo make docs
 	@echo make clean
+	@echo ""
+	@echo make release
 
 install: rustup-install cargo-install
 
@@ -47,3 +49,6 @@ docs:
 
 clean:
 	rm -fr ./target
+
+release:
+	cargo build --release
