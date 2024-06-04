@@ -1,17 +1,25 @@
-pub mod shapes;
+//! This is main entry point
+//! # Main entry point
+//! - refactored to move out to tests
 
+pub mod shapes;
+use mylib::some_lib_func;
+
+use crate::shapes::square::Square;
+use crate::shapes::triangle::Triangle;
 use crate::shapes::Shape;
-use crate::shapes::Square;
-use crate::shapes::Triangle;
 
 use std::any::type_name;
 
 fn type_of<T>(_: T) -> &'static str {
     type_name::<T>()
 }
-
+/// This is entry point
 fn main() {
     println!("Hello, shapes!");
+
+    // call library function
+    some_lib_func(123);
 
     // explicit struct and trait declarations
     let square1: Square = Square {
@@ -28,27 +36,27 @@ fn main() {
     // OOP style invocation
     println!(
         "shape::square: name: {}, area: {}",
-        square1.name,
-        square1.area()
+        &square1.name,
+        &square1.get_area()
     );
 
     println!(
         "shape::triangle: name: {}, area: {}",
-        triangle1.name,
-        triangle1.area()
+        &triangle1.name,
+        &triangle1.get_area()
     );
 
     // alternate invocation
     println!(
         "shape::square: name: {}, area: {}",
-        square1.name,
-        shapes::Shape::area(&square1)
+        &square1.name,
+        shapes::Shape::get_area(&square1)
     );
 
     println!(
         "shape::triangle: name: {}, area: {}",
         triangle1.name,
-        shapes::Shape::area(&square1)
+        shapes::Shape::get_area(&square1)
     );
 
     // let mut shapes: Vec<Shape> = vec![square1, triangle1];
@@ -61,8 +69,8 @@ fn main() {
     let mut total_area: f64 = 0.0;
 
     for shape in &shapes {
-        println!("shape::{}: area: {}", type_of(shape), shape.area());
-        total_area += shape.area();
+        println!("shape::{}: area: {}", type_of(shape), shape.get_area());
+        total_area += shape.get_area();
     }
     println!("total_area: {}", total_area);
 
@@ -81,8 +89,8 @@ fn main() {
 
     let mut total_area2: f64 = 0.0;
     for shape in shapes2.iter() {
-        println!("shape::{}: area: {}", type_of(shape), shape.area());
-        total_area2 += shape.area();
+        println!("shape::{}: area: {}", type_of(shape), shape.get_area());
+        total_area2 += shape.get_area();
     }
     println!("total_area2: {}", total_area2);
 }
